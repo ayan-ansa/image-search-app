@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 function Modal({
   setIsOpen,
   params,
+  isDark,
   setParams,
   download,
   isLiked,
@@ -36,7 +37,6 @@ function Modal({
         `${BASE_URL}/photos/${id}?client_id=${accessKey}`
       );
       const data = await response.json();
-      console.log(data.views, data.downloads);
       setImageData(data);
       setLoading(false);
     } catch (error) {
@@ -55,7 +55,11 @@ function Modal({
           <div className="h-16 w-16 border-4 border-t-[#000] rounded-full border-[#bdbdbd] animate-spin"></div>
         </div>
       ) : (
-        <div className="absolute inset-0 z-50 md:px-16 md:py-8 py-12 justify-center h-screen bg-black/40">
+        <div
+          className={
+            "absolute inset-0 z-50 md:px-16 md:py-8 py-12 justify-center h-screen bg-black/40"
+          }
+        >
           <button className="absolute md:top-5 md:right-5 top-3 right-3">
             <RxCross2
               className="text-2xl text-[#fff]"
@@ -66,7 +70,11 @@ function Modal({
               }}
             />
           </button>
-          <div className="bg-white w-full rounded shadow-md">
+          <div
+            className={`${
+              isDark ? "bg-black text-white" : "bg-white"
+            } w-full rounded shadow-md`}
+          >
             <div className="flex sm:items-center sm:flex-row sm:gap-0 gap-2 flex-col justify-between px-5 py-3">
               <div className="flex items-center gap-2">
                 <Link>
@@ -94,13 +102,17 @@ function Modal({
                   }}
                 >
                   <FaHeart
-                    className={`text-gray-500 ${
+                    className={`${isDark ? "text-white" : "text-gray-500"} ${
                       isLiked ? "text-red-500" : ""
-                    } group-hover:text-gray-900`}
+                    } group-hover:text-red-500`}
                   />
                 </div>
                 <div className="px-3 py-2 cursor-pointer rounded border group hover:border-gray-500 transition duration-100 border-gray-300 shadow">
-                  <FiPlus className="text-gray-500 group-hover:text-gray-900" />
+                  <FiPlus
+                    className={`{${
+                      isDark ? "text-white group-hover:text-white" : "text-gray-500 group-hover:text-gray-900"
+                    } `}
+                  />
                 </div>
                 <Link
                   onClick={() => download(imageData.urls.small)}
@@ -128,13 +140,13 @@ function Modal({
                  gap-4 md:gap-28"
                 >
                   <div>
-                    <p className="text-sm text-gray-500">Views</p>
+                    <p className={`text-sm ${isDark?"text-white":"text-gray-500"}`}>Views</p>
                     <span className="text-[15px]">
                       {imageData && (imageData?.views).toLocaleString()}
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Downloads</p>
+                    <p className={`text-sm ${isDark?"text-white":"text-gray-500"}`}>Downloads</p>
                     <span className="text-[15px]">
                       {imageData && (imageData?.downloads).toLocaleString()}
                     </span>
@@ -147,26 +159,26 @@ function Modal({
                       navigator.share({ url: window.location.href })
                     }
                   >
-                    <IoIosShareAlt className="text-gray-500 text-xl group-hover:text-gray-900" />
-                    <span className="text-[15px] text-gray-500 group-hover:text-gray-900">
+                    <IoIosShareAlt className={`text-gray-500 text-xl ${isDark?"group-hover:text-white":"group-hover:text-gray-900"}`} />
+                    <span className={`text-[15px] ${isDark?"group-hover:text-white":"group-hover:text-gray-900"} text-gray-500 `}>
                       Share
                     </span>
                   </div>
                   <div className="px-2 py-1 cursor-pointer flex items-center gap-1  rounded border group hover:border-gray-500 transition duration-100 border-gray-300 shadow">
-                    <MdInfo className="text-gray-500 text-lg group-hover:text-gray-900" />
-                    <span className="text-[15px] text-gray-500 group-hover:text-gray-900">
+                    <MdInfo className={`text-gray-500 text-lg ${isDark?"group-hover:text-white":"group-hover:text-gray-900"}`} />
+                    <span className={`text-[15px] ${isDark?"group-hover:text-white":"group-hover:text-gray-900"} text-gray-500 `}>
                       Info
                     </span>
                   </div>
                   <div className="px-3 py-[5px] cursor-pointer rounded border group hover:border-gray-500 transition duration-100 border-gray-300 shadow">
-                    <MdMoreHoriz className="text-gray-500 text-xl group-hover:text-gray-900" />
+                    <MdMoreHoriz className={`text-gray-500 text-lg ${isDark?"group-hover:text-white":"group-hover:text-gray-900"}`} />
                   </div>
                 </div>
               </div>
               <div className="max-w-[600px]">
                 <p className="text-sm">{imageData?.description}</p>
               </div>
-              <div className="flex flex-col gap-[5px] text-gray-500">
+              <div className={`flex flex-col gap-[5px] ${isDark?"text-white":"text-gray-500"}`}>
                 <div className="flex items-center gap-2 ">
                   <MdOutlineCalendarToday />
                   <span className="text-sm">
@@ -190,7 +202,7 @@ function Modal({
                 {imageData &&
                   imageData?.tags?.map(({ title }, index) => (
                     <Link key={index}>
-                      <p className="text-sm capitalize text-gray-500 hover:text-gray-700 px-[10px] py-1 bg-[#f1f1f1] hover:bg-gray-200 transition duration-100 rounded">
+                      <p className={`text-sm capitalize ${isDark?"text-white bg-slate-900":"text-gray-500 bg-[#f1f1f1]"} hover:text-gray-700 px-[10px] py-1 hover:bg-gray-200 transition duration-100 rounded`}>
                         {title}
                       </p>
                     </Link>
