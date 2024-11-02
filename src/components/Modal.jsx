@@ -13,7 +13,6 @@ import {
   MdOutlineVerifiedUser,
 } from "react-icons/md";
 import { accessKey, BASE_URL } from "../pages/Home/Home";
-import { timeAgo } from "../../../YoutubeClone/src/pages/HomePage/components/Feed/Card";
 import { toast } from "react-toastify";
 
 function Modal({
@@ -29,6 +28,36 @@ function Modal({
   const id = params.get("photos");
   const [loading, setLoading] = useState(false);
   const [imageData, setImageData] = useState("");
+
+
+  function timeAgo(dateString) {
+    const now = new Date();
+    const past = new Date(dateString);
+    const secondsAgo = Math.floor((now - past) / 1000);
+  
+    // Define time intervals in seconds
+    const intervals = {
+      year: 31536000,
+      month: 2592000,
+      week: 604800,
+      day: 86400,
+      hour: 3600,
+      minute: 60,
+    };
+  
+    // Determine the largest interval and calculate time difference
+    for (let interval in intervals) {
+      const intervalSeconds = intervals[interval];
+      const timeDifference = Math.floor(secondsAgo / intervalSeconds);
+  
+      if (timeDifference >= 1) {
+        return `${timeDifference} ${interval}${
+          timeDifference > 1 ? "s" : ""
+        } ago`;
+      }
+    }
+    return "Just now";
+  }
 
   const fetchImageData = async () => {
     setLoading(true);
