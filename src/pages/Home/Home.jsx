@@ -8,8 +8,8 @@ import Modal from "../../components/Modal";
 import { toast } from "react-toastify";
 import Form from "../../components/Form";
 
-export const accessKey = "78SKzuxgvXKTgJB7sAawVBwtJHv9xGoJttmXyTyG8-I";
-export const BASE_URL = "https://api.unsplash.com";
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY;
 function Home() {
   const [apiData, setApiData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ function Home() {
     setLoading(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/search/photos?page=${page}&query=${query}&client_id=${accessKey}`
+        `${BASE_URL}/search/photos?page=${page}&query=${query}&client_id=${ACCESS_KEY}`
       );
       const data = await response.json();
       setApiData((prev) => [...prev, ...data.results]);
@@ -41,7 +41,7 @@ function Home() {
     setLoading(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/photos?page=${page}&client_id=${accessKey}`
+        `${BASE_URL}/photos?page=${page}&client_id=${ACCESS_KEY}`
       );
       const data = await response.json();
       setApiData((prev) => [...prev, ...data]);

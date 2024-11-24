@@ -12,7 +12,7 @@ import {
   MdOutlineCameraAlt,
   MdOutlineVerifiedUser,
 } from "react-icons/md";
-import { accessKey, BASE_URL } from "../pages/Home/Home";
+import { BASE_URL, ACCESS_KEY } from "../pages/Home/Home";
 import { toast } from "react-toastify";
 
 function Modal({
@@ -63,7 +63,7 @@ function Modal({
     setLoading(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/photos/${id}?client_id=${accessKey}`
+        `${BASE_URL}/photos/${id}?client_id=${ACCESS_KEY}`
       );
       const data = await response.json();
       setImageData(data);
