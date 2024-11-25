@@ -6,6 +6,7 @@ import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import Modal from "../../components/Modal";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Form from "../../components/Form";
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -168,8 +169,8 @@ function Home() {
               <a
                 href="https://www.linkedin.com/in/abdulla-ansari-80aa3925a/"
                 target="_black"
-                className={`rounded-2xl px-4 py-1.5 text-sm ${
-                  isDark ? "bg-slate-900 text-white" : "bg-slate-200 text-black"
+                className={`rounded-2xl px-4 py-1.5 text-sm transition duration-100 ease-linear ${
+                  isDark ? "bg-slate-900 text-white hover:bg-slate-800" : "bg-slate-200 text-black hover:bg-slate-300"
                 } font-medium`}
               >
                 Follow along on LinkedIn
@@ -244,7 +245,11 @@ function Home() {
                           className="sm:hidden"
                           onClick={() => download(urls.small)}
                         >
-                          <button className={`px-3 py-[6px] rounded border border-gray-300 hover:border-gray-500 shadow text-sm ${isDark?"bg-white":""}`}>
+                          <button
+                            className={`px-3 py-[6px] rounded border border-gray-300 hover:border-gray-500 shadow text-sm ${
+                              isDark ? "bg-white" : ""
+                            }`}
+                          >
                             Download
                           </button>
                         </Link>
