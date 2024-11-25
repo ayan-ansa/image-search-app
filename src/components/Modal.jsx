@@ -60,8 +60,8 @@ function Modal({
   }
 
   const fetchImageData = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const response = await fetch(
         `${BASE_URL}/photos/${id}?client_id=${ACCESS_KEY}`
       );

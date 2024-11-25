@@ -145,7 +145,7 @@ function Home() {
   };
   return (
     <>
-      <div className={`${isDark ? "bg-black" : ""}`}>
+      <div className={`${isDark ? "bg-[#030711]" : ""}`}>
         <Header
           setQuery={setQuery}
           query={query}
@@ -169,9 +169,9 @@ function Home() {
               <a
                 href="https://www.linkedin.com/in/abdulla-ansari-80aa3925a/"
                 target="_black"
-                className={`rounded-2xl px-4 py-1.5 text-sm transition duration-100 ease-linear ${
+                className={`rounded-2xl font-medium px-4 py-1.5 text-sm transition duration-100 ease-linear ${
                   isDark ? "bg-slate-900 text-white hover:bg-slate-800" : "bg-slate-200 text-black hover:bg-slate-300"
-                } font-medium`}
+                }`}
               >
                 Follow along on LinkedIn
               </a>
